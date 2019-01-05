@@ -1,0 +1,85 @@
+Main = try([pickWeight]; [pickNewTarget]; removeEdge!; moveEdge)
+
+pickWeight
+(
+  a, b : list;
+  x : int
+)
+[
+  (n0, "NEURON":x)
+  (n1, "INPUT":a)
+  |
+  (e0, n0, n1, b)
+]
+=>
+[
+  (n0(R), "NEURON":x#green)
+  (n1(R), "INPUT":a#green)
+  |
+  (e0, n0, n1, b#green)
+]
+interface = {
+  n0, n1
+}
+
+pickNewTarget
+(
+  a : list
+)
+[
+  (n0, "INPUT":a)
+  |
+]
+=>
+[
+  (n0(R), "INPUT":a#blue)
+  |
+]
+interface = {
+  n0
+}
+
+removeEdge
+(
+  a, b : list;
+  x : int
+)
+[
+  (n0(R), "NEURON":x#green)
+  (n1(R), "INPUT":a#blue)
+  |
+  (e0, n0, n1, b)
+]
+=>
+[
+  (n0(R), "NEURON":x#green)
+  (n1(R), "INPUT":a#blue)
+  |
+]
+interface = {
+  n0, n1
+}
+
+moveEdge
+(
+  a, b, c : list;
+  x : int
+)
+[
+  (n0(R), "NEURON":x#green)
+  (n1(R), "INPUT":a#green)
+  (n2(R), "INPUT":b#blue)
+  |
+  (e0, n0, n1, c#green)
+]
+=>
+[
+  (n0, "NEURON":x)
+  (n1, "INPUT":a)
+  (n2, "INPUT":b)
+  |
+  (e0, n0, n2, c)
+]
+interface = {
+  n0, n1, n2
+}

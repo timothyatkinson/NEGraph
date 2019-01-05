@@ -1,0 +1,79 @@
+Main = [pick_source]; [pick_target]; removeEdge!; addEdge
+
+pick_source
+(
+x : int
+)
+[
+  (n0, "NEURON":x)
+  |
+]
+=>
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  |
+]
+interface = {
+  n0
+}
+
+pick_target
+(
+a : list;
+s : string
+)
+[
+  (n0, s:a)
+  |
+]
+=>
+[
+  (n0(R), s:a:"TARGET")
+  |
+]
+interface = {
+  n0
+}
+where s = "INPUT" or s = "BIAS"
+
+removeEdge
+(
+  a, b : list;
+  x : int
+)
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  (n1(R), a:"TARGET")
+  |
+  (e0, n0, n1, b)
+]
+=>
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  (n1(R), a:"TARGET")
+  |
+]
+interface = {
+  n0, n1
+}
+
+addEdge
+(
+  a : list;
+  x : int
+)
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  (n1(R), a:"TARGET")
+  |
+]
+=>
+[
+  (n0, "NEURON":x)
+  (n1, a)
+  |
+  (e0, n0, n1, rand_int(-1000, 1000))
+]
+interface = {
+  n0, n1
+}

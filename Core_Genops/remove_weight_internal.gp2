@@ -1,0 +1,41 @@
+Main = try (g_uniform:[remove_internal_edge, remove_internal_loop])
+
+remove_internal_edge
+(
+  a : list;
+  x, y : int
+)
+[
+  (n0, "NEURON":x)
+  (n1, "NEURON":y)
+  |
+  (e0, n0, n1, a)
+]
+=>
+[
+  (n0, "NEURON":x)
+  (n1, "NEURON":y)
+  |
+]
+interface = {
+  n0, n1
+}
+
+remove_internal_loop
+(
+  a : list;
+  x : int
+)
+[
+  (n0, "NEURON":x)
+  |
+  (e0, n0, n0, a)
+]
+=>
+[
+  (n0, "NEURON":x)
+  |
+]
+interface = {
+  n0
+}

@@ -1,0 +1,18 @@
+Main = mutate_leak_rate
+
+mutate_leak_rate
+(
+  a : list
+)
+[
+  (n0, "LEAK RATE":a#red)
+  |
+]
+=>
+[
+  (n0, "LEAK RATE":rand_int(0, 1000)#red)
+  |
+]
+interface = {
+  n0
+}

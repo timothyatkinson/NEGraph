@@ -1,0 +1,18 @@
+Main = mutate_input_scaling
+
+mutate_input_scaling
+(
+  a : list
+)
+[
+  (n0, "INPUT SCALING":a#red)
+  |
+]
+=>
+[
+  (n0, "INPUT SCALING":rand_int(0, 1000)#red)
+  |
+]
+interface = {
+  n0
+}

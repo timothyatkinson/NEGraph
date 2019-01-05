@@ -1,0 +1,21 @@
+Main = try [remove_input_edge]
+
+remove_input_edge
+(
+  a, b : list
+)
+[
+  (n0, "NEURON")
+  (n1, "INPUT":a)
+  |
+  (e0, n0, n1, b)
+]
+=>
+[
+  (n0, "NEURON")
+  (n1, "INPUT":a)
+  |
+]
+interface = {
+  n0, n1
+}

@@ -1,0 +1,114 @@
+Main = [pick_source]; [pick_target]; {removeEdge, removeLoop}!; {addEdge, addLoop}
+
+pick_source
+(
+x : int
+)
+[
+  (n0, "NEURON":x)
+  |
+]
+=>
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  |
+]
+interface = {
+  n0
+}
+
+pick_target
+(
+a : list;
+x : int
+)
+[
+  (n0, "NEURON":x:a)
+  |
+]
+=>
+[
+  (n0(R), "NEURON":x:a:"TARGET")
+  |
+]
+interface = {
+  n0
+}
+
+removeEdge
+(
+  a : list;
+  x, y : int
+)
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  (n1(R), "NEURON":y:"TARGET")
+  |
+  (e0, n0, n1, a)
+]
+=>
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  (n1(R), "NEURON":y:"TARGET")
+  |
+]
+interface = {
+  n0, n1
+}
+
+removeLoop
+(
+  a : list;
+  x : int
+)
+[
+  (n0(R), "NEURON":x:"SOURCE":"TARGET")
+  |
+  (e0, n0, n0, a)
+]
+=>
+[
+  (n0(R), "NEURON":x:"SOURCE":"TARGET")
+  |
+]
+interface = {
+  n0
+}
+
+addEdge
+(
+x, y : int
+)
+[
+  (n0(R), "NEURON":x:"SOURCE")
+  (n1(R), "NEURON":y:"TARGET")
+  |
+]
+=>
+[
+  (n0, "NEURON":x)
+  (n1, "NEURON":y)
+  |
+  (e0, n0, n1, rand_int(-500, 500))
+]
+interface = {
+  n0, n1
+}
+
+addLoop
+(
+x : int
+)
+[
+  (n0(R), "NEURON":x:"SOURCE":"TARGET")
+  |
+]
+=>
+[
+  (n0, "NEURON":x)
+  |
+  (e0, n0, n0, rand_int(-500, 500))
+]
+interface = {
+  n0
+}

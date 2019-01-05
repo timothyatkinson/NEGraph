@@ -1,8 +1,8 @@
-INCDIRS=P-GP2/include Math Datasets Network
+INCDIRS=P-GP2/include Math Datasets Network Evolution
 LIBDIR=P-GP2/lib
-ATOMIC_MUTATIONS =
+ATOMIC_MUTATIONS =Core_Genops/move_weight_input Core_Genops/move_weight_int Core_Genops/add_weight_internal Core_Genops/add_weight_input Core_Genops/remove_weight_internal Core_Genops/remove_weight_input Core_Genops/mutate_leak_rate Core_Genops/mutate_input_scal Core_Genops/mutate_spec_rad
 GP2_OBJECTS = $(ATOMIC_MUTATIONS)
-OBJECTS := Math/*.c Datasets/dataset.c Datasets/narma.c *.c Network/*.c
+OBJECTS := Math/*.c Datasets/dataset.c Datasets/narma.c *.c Network/*.c GraphNetwork/*.c Evolution/*.c
 CC=gcc
 
 CFLAGS = 	$(foreach var,$(INCDIRS),-I $(var)) $(foreach var,$(GP2_OBJECTS),-I $(var)) -L $(LIBDIR) -O2 -lgp2 -lgsl -lgslcblas -lm -g
